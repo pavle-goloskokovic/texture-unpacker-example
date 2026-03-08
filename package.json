@@ -1,0 +1,61 @@
+{
+    "name": "texture-unpacker-example",
+    "version": "0.1.0",
+    "private": true,
+    "description": "TextureUnpacker Example",
+    "keywords": [
+        "texture",
+        "packer",
+        "texturepacker",
+        "codeandweb",
+        "unpacker",
+        "textureunpacker",
+        "pack",
+        "unpack",
+        "atlas",
+        "textureatlas",
+        "png",
+        "json",
+        "plist",
+        "phaser",
+        "phaser3",
+        "pixi",
+        "pixijs",
+        "pixi-js",
+        "cocos",
+        "cocos2d",
+        "cocos2d-x",
+        "python",
+        "node",
+        "nodejs",
+        "js",
+        "javascript",
+        "ts",
+        "typescript"
+    ],
+    "homepage": "https://github.com/pavle-goloskokovic/texture-unpacker-example#readme",
+    "bugs": {
+        "url": "https://github.com/pavle-goloskokovic/texture-unpacker-example/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pavle-goloskokovic/texture-unpacker-example.git"
+    },
+    "license": "MIT",
+    "author": "Pavle Goloskoković",
+    "dependencies": {
+        "texture-unpacker": "github:pavle-goloskokovic/texture-unpacker"
+    },
+    "scripts": {
+        "unpack:help": "texture-unpacker -h",
+        "unpack:json": "texture-unpacker -s example/Sprite.png -f json",
+        "unpack:plist": "texture-unpacker -s example/Sprite.png -f plist",
+        "unpack:default": "texture-unpacker -s example/Sprite.png",
+        "unpack:noext": "texture-unpacker -s example/Sprite",
+        "unpack:dir": "texture-unpacker -s example",
+        "unpack:all": "texture-unpacker",
+        "unpack:custom-data": "texture-unpacker -s example/Sprite -d example/Sprite_custom.json",
+        "unpack:custom-output": "texture-unpacker -s example/Sprite -o example/Sprite_unpacked",
+        "unpack:clean": "texture-unpacker -s example/Sprite -c"
+    }
+}
