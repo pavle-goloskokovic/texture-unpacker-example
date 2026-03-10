@@ -46,16 +46,34 @@
     "dependencies": {
         "texture-unpacker": "github:pavle-goloskokovic/texture-unpacker"
     },
+    "devDependencies": {
+        "tsx": "^4.21.0"
+    },
     "scripts": {
-        "unpack:help": "texture-unpacker -h",
-        "unpack:json": "texture-unpacker -s example/Sprite.png -f json",
-        "unpack:plist": "texture-unpacker -s example/Sprite.png -f plist",
-        "unpack:default": "texture-unpacker -s example/Sprite.png",
-        "unpack:noext": "texture-unpacker -s example/Sprite",
-        "unpack:dir": "texture-unpacker -s example",
-        "unpack:all": "texture-unpacker",
-        "unpack:custom-data": "texture-unpacker -s example/Sprite -d example/Sprite_custom.json",
-        "unpack:custom-output": "texture-unpacker -s example/Sprite -o example/Sprite_unpacked",
-        "unpack:clean": "texture-unpacker -s example/Sprite -c"
+        "unpack:cli:help": "texture-unpacker -h",
+        "unpack:cli:version": "texture-unpacker -v",
+        "unpack:cli:json": "texture-unpacker -s sheets/Sprite.png -f json",
+        "unpack:cli:plist": "texture-unpacker -s sheets/Sprite.png -f plist",
+        "unpack:cli:default": "texture-unpacker -s sheets/Sprite.png",
+        "unpack:cli:noext": "texture-unpacker -s sheets/Sprite",
+        "unpack:cli:dir": "texture-unpacker -s sheets",
+        "unpack:cli:all": "texture-unpacker",
+        "unpack:cli:custom-data": "texture-unpacker -s sheets/Sprite -d sheets/Sprite_custom.json",
+        "unpack:cli:custom-output": "texture-unpacker -s sheets/Sprite -o sheets/Sprite_unpacked",
+        "unpack:cli:clean": "texture-unpacker -s sheets/Sprite -c",
+        "unpack:js:json": "node scripts/unpack-json.js",
+        "unpack:js:plist": "node scripts/unpack-plist.js",
+        "unpack:js:default": "node scripts/unpack-default.js",
+        "unpack:js:noext": "node scripts/unpack-noext.js",
+        "unpack:js:custom-data": "node scripts/unpack-custom-data.js",
+        "unpack:js:custom-output": "node scripts/unpack-custom-output.js",
+        "unpack:js:clean": "node scripts/unpack-clean.js",
+        "unpack:ts:json": "tsx scripts/unpack-json.ts",
+        "unpack:ts:plist": "tsx scripts/unpack-plist.ts",
+        "unpack:ts:default": "tsx scripts/unpack-default.ts",
+        "unpack:ts:noext": "tsx scripts/unpack-noext.ts",
+        "unpack:ts:custom-data": "tsx scripts/unpack-custom-data.ts",
+        "unpack:ts:custom-output": "tsx scripts/unpack-custom-output.ts",
+        "unpack:ts:clean": "tsx scripts/unpack-clean.ts"
     }
 }
