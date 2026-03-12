@@ -44,7 +44,7 @@
     "license": "MIT",
     "author": "Pavle Goloskoković",
     "dependencies": {
-        "texture-unpacker": "github:pavle-goloskokovic/texture-unpacker"
+        "texture-unpacker": "^1.0.0"
     },
     "devDependencies": {
         "tsx": "^4.21.0"

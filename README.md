@@ -18,6 +18,8 @@ npm install texture-unpacker
 
 Examples assume a local install (e.g. `npm install texture-unpacker`) and therefore use `npx`. With a global install (`npm install -g texture-unpacker`) you may invoke `texture-unpacker` directly.
 
+> **Tip:** the `package.json` in this project includes a set of `unpack:cli:*` scripts that run the same command‑line examples shown above, plus matching `unpack:js:*` and `unpack:ts:*` targets that execute the corresponding JavaScript/TypeScript files from the `scripts/` folder. You can run or inspect those scripts for quick reproduction of any sample or as a starting point for your own code.
+
 The `sheets` directory contains `Sprite.png` along with matching `Sprite.json` and `Sprite.plist` data files; the tool expects the same base name with different extensions.
 
 Executing the example below (CLI or programmatic API) reads the `json` file, creates a `Sprite` directory beside the sheet, and writes out individual sprites:
@@ -238,5 +240,3 @@ unpack('sheets/Sprite', {
     console.log('Texture unpacked.');
 });
 ```
-
-> **Tip:** the `package.json` in this project includes a set of `unpack:cli:*` scripts that run the same command‑line examples shown above, plus matching `unpack:js:*` and `unpack:ts:*` targets that execute the corresponding JavaScript/TypeScript files from the `scripts/` folder. You can run or inspect those scripts for quick reproduction of any sample or as a starting point for your own code.
