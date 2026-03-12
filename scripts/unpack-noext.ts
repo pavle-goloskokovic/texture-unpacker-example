@@ -4,6 +4,6 @@ import { unpack } from 'texture-unpacker';
 // npx texture-unpacker -s sheets/Sprite
 
 unpack('sheets/Sprite') // Directory or sprite sheet path/name (no extension)
-.then(() => {
-    console.log('Texture unpacked.');
-});
+    .then(() => {
+        console.log('Texture unpacked.');
+    });

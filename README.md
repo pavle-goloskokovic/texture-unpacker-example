@@ -16,11 +16,11 @@ npm install texture-unpacker
 
 ## Example
 
-The commands shown below assume that `texture-unpacker` has been installed locally in your project (for example, with `npm install texture-unpacker`), so we prefix invocations with `npx`. If you prefer to install the CLI globally (`npm install -g texture-unpacker`), you can omit `npx` and run `texture-unpacker` directly. For the purpose of this example the package is installed locally and the `npx` form is used.
+Examples assume a local install (e.g. `npm install texture-unpacker`) and therefore use `npx`. With a global install (`npm install -g texture-unpacker`) you may invoke `texture-unpacker` directly.
 
-We have sprite sheet and data files `Sprite.png`, `Sprite.json`, and `Sprite.plist` available in the `sheets` directory. The tool assumes that sprite sheet and data files have the same name with different extensions.
+The `sheets` directory contains `Sprite.png` along with matching `Sprite.json` and `Sprite.plist` data files; the tool expects the same base name with different extensions.
 
-Running the command below will read `json` data file, create `Sprite` directory at the same level as the sprite sheet file, and populate it with individual sprites:
+Executing the example below (CLI or programmatic API) reads the `json` file, creates a `Sprite` directory beside the sheet, and writes out individual sprites:
 
 ### Command-line
 ```bash
@@ -30,6 +30,7 @@ npx texture-unpacker -s sheets/Sprite.png -f json
 ### Programmatic API (CommonJS)
 ```js
 const { unpack } = require('texture-unpacker');
+
 unpack('sheets/Sprite.png', {
     format: 'json'
 }).then(() => {
@@ -59,6 +60,7 @@ npx texture-unpacker -s sheets/Sprite.png -f plist
 ### Programmatic API (CommonJS)
 ```js
 const { unpack } = require('texture-unpacker');
+
 unpack('sheets/Sprite.png', {
     format: 'plist'
 }).then(() => {
@@ -78,7 +80,7 @@ unpack('sheets/Sprite.png', {
 });
 ```
 
-Omitting the format argument in the command above will use `json` data since it is the default expected format:
+When no format is specified the tool assumes JSON data, looking first for a same‑name `.json` and automatically falling back to `.plist` if the JSON is absent (so if only a plist file exists it will be detected and used):
 
 ### Command-line
 ```bash
@@ -88,6 +90,7 @@ npx texture-unpacker -s sheets/Sprite.png
 ### Programmatic API (CommonJS)
 ```js
 const { unpack } = require('texture-unpacker');
+
 unpack('sheets/Sprite.png')
   .then(() => {
     console.log('Texture unpacked.');
@@ -104,9 +107,7 @@ unpack('sheets/Sprite.png')
   });
 ```
 
-In case you have only `plist` data file available, the above command would work the same since the tool can automatically detect available data file.
-
-You can also omit the sprite sheet extension `.png` when running the tool for the same effect:
+The `.png` extension is optional; when omitted, the tool will automatically try to resolve the base name to a `.png` sheet file, so you can supply just the name without extension:
 
 ### Command-line
 ```bash
@@ -116,6 +117,7 @@ npx texture-unpacker -s sheets/Sprite
 ### Programmatic API (CommonJS)
 ```js
 const { unpack } = require('texture-unpacker');
+
 unpack('sheets/Sprite')
   .then(() => {
     console.log('Texture unpacked.');
@@ -132,22 +134,22 @@ unpack('sheets/Sprite')
   });
 ```
 
-Providing directory path as the input path will scan provided directory for `.png` sprite sheets with accompanying data files to unpack:
+Pointing `-s` at a directory scans it for `.png` sheets with matching data files:
 
 ### Command-line
 ```bash
 npx texture-unpacker -s sheets
 ```
-Note that providing `sheets/Sprite` as the input path will give priority to `sheets/Sprite.png` sprite sheet file, rather than to the generated `sheets/Sprite` directory, to avoid undesired behavior if you run the tool repeatedly.
+If you specify `sheets/Sprite`, the tool prefers `sheets/Sprite.png` over the folder of same name to avoid recursive runs.
 
-And finally, omitting the input path argument completely will scan the entire project structure to find all available `.png` sprite sheets with accompanying data files to unpack:
+Omitting `-s` scans the whole project for sheets and data files:
 
 ### Command-line
 ```bash
-texture-unpacker
+npx texture-unpacker
 ```
 
-If you want to override the default data path, you can pass a custom one as an argument:
+To use a custom data file instead of the default same‑name JSON/PLIST, specify its path with the `-d` option. The path must include the file extension (the format is then inferred and any passed `-f` flag is ignored):
 
 ### Command-line
 ```bash
@@ -157,6 +159,7 @@ npx texture-unpacker -s sheets/Sprite -d sheets/Sprite_custom.json
 ### Programmatic API (CommonJS)
 ```js
 const { unpack } = require('texture-unpacker');
+
 unpack('sheets/Sprite', {
     data: 'sheets/Sprite_custom.json'
 }).then(() => {
@@ -175,9 +178,8 @@ unpack('sheets/Sprite', {
     console.log('Texture unpacked.');
 });
 ```
-Note that custom data file path must include file extension, and if data format is also passed it will be ignored.
 
-If you want to override the default output path, you can pass a custom one as an argument:
+If you’d like the unpacked sprites to go somewhere other than the default same‑name folder, specify a custom output directory with `-o`. The path may point to an existing directory or a new one, which will be created:
 
 ### Command-line
 ```bash
@@ -187,6 +189,7 @@ npx texture-unpacker -s sheets/Sprite -o sheets/Sprite_unpacked
 ### Programmatic API (CommonJS)
 ```js
 const { unpack } = require('texture-unpacker');
+
 unpack('sheets/Sprite', {
     output: 'sheets/Sprite_unpacked'
 }).then(() => {
@@ -206,7 +209,7 @@ unpack('sheets/Sprite', {
 });
 ```
 
-If you want to clean the output directory before unpacking you can indicate that by passing another argument:
+If you want the tool to remove any existing files in the target output directory before unpacking, enable cleaning by providing the `-c` flag:
 
 ### Command-line
 ```bash
@@ -216,6 +219,7 @@ npx texture-unpacker -s sheets/Sprite -c
 ### Programmatic API (CommonJS)
 ```js
 const { unpack } = require('texture-unpacker');
+
 unpack('sheets/Sprite', {
     clean: true
 }).then(() => {
@@ -234,3 +238,5 @@ unpack('sheets/Sprite', {
     console.log('Texture unpacked.');
 });
 ```
+
+> **Tip:** the `package.json` in this project includes a set of `unpack:cli:*` scripts that run the same command‑line examples shown above, plus matching `unpack:js:*` and `unpack:ts:*` targets that execute the corresponding JavaScript/TypeScript files from the `scripts/` folder. You can run or inspect those scripts for quick reproduction of any sample or as a starting point for your own code.
